@@ -1,27 +1,5 @@
 [
   {
-    "id": 7,
-    "name": "Malone Petersen",
-    "email": "malonepetersen@gology.com",
-    "gender": "male",
-    "address": {
-      "street": "Florence Avenue",
-      "city": "Chicago"
-    },
-    "phone": "+1 (880) 402-3541"
-  },
-  {
-    "id": 8,
-    "name": "Sheila Hill",
-    "email": "sheilahill@gology.com",
-    "gender": "female",
-    "address": {
-      "street": "Mill Lane",
-      "city": "San Diego"
-    },
-    "phone": "+1 (946) 534-3903"
-  },
-  {
     "id": 9,
     "name": "Huffman Butler",
     "email": "huffmanbutler@gology.com",
@@ -174,17 +152,6 @@
       "city": "Los Angeles"
     },
     "phone": "+1 (871) 530-2931"
-  },
-  {
-    "id": 25,
-    "name": "Norton Slater",
-    "email": "nortonslater@gology.com",
-    "gender": "male",
-    "address": {
-      "street": "Erasmus Street",
-      "city": "Los Angeles"
-    },
-    "phone": "+1 (924) 562-2254"
   },
   {
     "id": 26,
@@ -503,71 +470,5 @@
       "city": "Chicago"
     },
     "phone": "+1 (962) 437-3225"
-  },
-  {
-    "id": 57,
-    "name": "Burgess Strickland",
-    "email": "burgessstrickland@gology.com",
-    "gender": "male",
-    "address": {
-      "street": "Sumner Place",
-      "city": "New York"
-    },
-    "phone": "+1 (928) 478-3924"
-  },
-  {
-    "id": 58,
-    "name": "Mildred Alvarado",
-    "email": "mildredalvarado@gology.com",
-    "gender": "female",
-    "address": {
-      "street": "Thatford Avenue",
-      "city": "San Diego"
-    },
-    "phone": "+1 (941) 567-2861"
-  },
-  {
-    "id": 59,
-    "name": "Wells Castaneda",
-    "email": "wellscastaneda@gology.com",
-    "gender": "male",
-    "address": {
-      "street": "Cyrus Avenue",
-      "city": "San Diego"
-    },
-    "phone": "+1 (951) 465-3463"
-  },
-  {
-    "id": 60,
-    "name": "Mcclain French",
-    "email": "mcclainfrench@gology.com",
-    "gender": "male",
-    "address": {
-      "street": "Village Court",
-      "city": "San Diego"
-    },
-    "phone": "+1 (870) 500-2974"
-  },
-  {
-    "id": 61,
-    "name": "Anita Branch",
-    "email": "anitabranch@gology.com",
-    "gender": "female",
-    "address": {
-      "street": "Nassau Avenue",
-      "city": "New York"
-    },
-    "phone": "+1 (833) 549-3771"
-  },
-  {
-    "id": 63,
-    "name": "Latasha Tillman",
-    "email": "latashatillman@gology.com",
-    "gender": "female",
-    "address": {
-      "street": "Williams Place",
-      "city": "New York"
-    },
-    "phone": "+1 (815) 425-3440"
   }
 ]

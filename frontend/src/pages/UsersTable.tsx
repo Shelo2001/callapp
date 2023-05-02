@@ -88,8 +88,10 @@ const UsersTable: React.FC = () => {
   }
 
   return (
-    <>
-      <Button type='primary'>Add new user</Button>
+    <div style={{ padding: '30px' }}>
+      <Button style={{ marginBottom: '10px' }} type='primary'>
+        Add new user
+      </Button>
 
       <Table
         onRow={(e) => ({
@@ -152,7 +154,7 @@ const UsersTable: React.FC = () => {
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   )
 }
 
