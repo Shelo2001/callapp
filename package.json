@@ -1,0 +1,21 @@
+{
+  "name": "callapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node backend/app.js",
+    "server": "nodemon backend/app.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Akaki Shelia",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.0.1",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "nodemon": "^2.0.22",
+    "request": "^2.88.2"
+  }
+}
