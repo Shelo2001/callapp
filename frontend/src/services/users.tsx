@@ -19,6 +19,7 @@ interface UserStore {
   getUsers: () => Promise<void>
   getUserById: (id: number) => Promise<User>
   deleteUser: (id: number) => Promise<void>
+  addUser: (data: object) => Promise<void>
 }
 
 const userStore = createStore<UserStore>((set) => ({
@@ -47,6 +48,17 @@ const userStore = createStore<UserStore>((set) => ({
     try {
       const response: AxiosResponse<User> = await axios.delete<User>(
         `/api/users/user/${id}`
+      )
+      set({ user: response.data })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async addUser(data: object) {
+    try {
+      const response: AxiosResponse<User> = await axios.post<User>(
+        `/api/users/create`,
+        data
       )
       set({ user: response.data })
     } catch (error) {

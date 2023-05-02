@@ -3,6 +3,7 @@ import { useStore } from 'zustand'
 import userStore from '../services/users'
 import { Table, Modal, Input, Select, Button } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
+import NewUser from '../components/NewUser'
 
 const UsersTable: React.FC = () => {
   const { getUsers, users, getUserById, user, deleteUser } = useStore(userStore)
@@ -38,6 +39,12 @@ const UsersTable: React.FC = () => {
       </Button>
     ),
   }))
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const handleModalClose = () => {
+    setIsModalVisible(false)
+  }
 
   const columns = [
     {
@@ -89,7 +96,11 @@ const UsersTable: React.FC = () => {
 
   return (
     <div style={{ padding: '30px' }}>
-      <Button style={{ marginBottom: '10px' }} type='primary'>
+      <Button
+        onClick={() => setIsModalVisible(true)}
+        style={{ marginBottom: '10px' }}
+        type='primary'
+      >
         Add new user
       </Button>
 
@@ -154,6 +165,12 @@ const UsersTable: React.FC = () => {
           </div>
         </div>
       </Modal>
+      <NewUser
+        visible={isModalVisible}
+        onClose={handleModalClose}
+        title='My Modal Title'
+        content='This is the content of my modal'
+      />
     </div>
   )
 }
