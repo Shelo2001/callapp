@@ -48,4 +48,13 @@ const deleteUser = async (req, res) => {
   })
 }
 
-module.exports = { getUsers, addUser, deleteUser }
+const getUserById = async (req, res) => {
+  const id = req.params.id
+  fs.readFile('data.json', 'utf8', (err, data) => {
+    let users = JSON.parse(data)
+    const user = users.find((u) => u.id === parseInt(id))
+    res.json(user)
+  })
+}
+
+module.exports = { getUsers, addUser, deleteUser, getUserById }
