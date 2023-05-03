@@ -32,7 +32,7 @@ const userStore = createStore<UserStore>((set) => ({
     set({ loading: true })
     try {
       const response: AxiosResponse<User[]> = await axios.get<User[]>(
-        'https://jade-cendol-347e76.netlify.app/.netlify/functions/app'
+        'https://brilliant-tulumba-e4c4ea.netlify.app/.netlify/functions/app'
       )
       set({ users: response.data, loading: false })
     } catch (error) {
@@ -42,7 +42,7 @@ const userStore = createStore<UserStore>((set) => ({
   async getUserById(id: number) {
     try {
       const response: AxiosResponse<User> = await axios.get<User>(
-        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/user/${id}`
+        `https://brilliant-tulumba-e4c4ea.netlify.app/.netlify/functions/app/user/${id}`
       )
       set({ user: response.data })
     } catch (error) {
@@ -52,7 +52,7 @@ const userStore = createStore<UserStore>((set) => ({
   async deleteUser(id: number) {
     try {
       const response: AxiosResponse<User> = await axios.delete<User>(
-        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/user/${id}`
+        `https://brilliant-tulumba-e4c4ea.netlify.app/.netlify/functions/app/user/${id}`
       )
       set({ user: response.data })
       window.location.reload()
@@ -63,7 +63,7 @@ const userStore = createStore<UserStore>((set) => ({
   async addUser(data: object) {
     try {
       const response: AxiosResponse<User> = await axios.post<User>(
-        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/create`,
+        `https://brilliant-tulumba-e4c4ea.netlify.app/.netlify/functions/app/user/create`,
         data
       )
       if (response.data) {
@@ -82,11 +82,11 @@ const userStore = createStore<UserStore>((set) => ({
   async updateUser(data: object, id: number) {
     try {
       const response: AxiosResponse<User> = await axios.put<User>(
-        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/user/${id}`,
+        `https://brilliant-tulumba-e4c4ea.netlify.app/.netlify/functions/app/user/${id}`,
         data
       )
       if (response.data) {
-        window.location.href = '/users'
+        window.location.reload()
       }
     } catch (error) {
       console.log(error)

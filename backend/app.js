@@ -25,11 +25,9 @@ app.use('/api/users', usersRoutes)
 
 router.get('/', getUsers)
 router.post('/create', addUser)
-router
-  .route('/user/:id')
-  .get(getUserById)
-  .put(updateUserById)
-  .delete(deleteUser)
+router.get('/user/:id', getUserById)
+router.put('/user/:id', updateUserById)
+router.delete('/user/:id', deleteUser)
 
 app.use('/.netlify/functions/app', router)
 
