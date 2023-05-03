@@ -32,7 +32,7 @@ const userStore = createStore<UserStore>((set) => ({
     set({ loading: true })
     try {
       const response: AxiosResponse<User[]> = await axios.get<User[]>(
-        '/api/users'
+        'https://jade-cendol-347e76.netlify.app/.netlify/functions/app'
       )
       set({ users: response.data, loading: false })
     } catch (error) {
@@ -42,7 +42,7 @@ const userStore = createStore<UserStore>((set) => ({
   async getUserById(id: number) {
     try {
       const response: AxiosResponse<User> = await axios.get<User>(
-        `/api/users/user/${id}`
+        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/user/${id}`
       )
       set({ user: response.data })
     } catch (error) {
@@ -52,7 +52,7 @@ const userStore = createStore<UserStore>((set) => ({
   async deleteUser(id: number) {
     try {
       const response: AxiosResponse<User> = await axios.delete<User>(
-        `/api/users/user/${id}`
+        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/user/${id}`
       )
       set({ user: response.data })
       window.location.reload()
@@ -63,7 +63,7 @@ const userStore = createStore<UserStore>((set) => ({
   async addUser(data: object) {
     try {
       const response: AxiosResponse<User> = await axios.post<User>(
-        `/api/users/create`,
+        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/create`,
         data
       )
       if (response.data) {
@@ -82,7 +82,7 @@ const userStore = createStore<UserStore>((set) => ({
   async updateUser(data: object, id: number) {
     try {
       const response: AxiosResponse<User> = await axios.put<User>(
-        `/api/users/user/${id}`,
+        `https://jade-cendol-347e76.netlify.app/.netlify/functions/app/user/${id}`,
         data
       )
       if (response.data) {

@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const serverless = require('serverless-http')
 const usersRoutes = require('./routes/usersRoutes')
@@ -10,6 +11,8 @@ const {
   updateUserById,
   deleteUser,
 } = require('./controllers/usersController')
+
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/api/users', usersRoutes)
