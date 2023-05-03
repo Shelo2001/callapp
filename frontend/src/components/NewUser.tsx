@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Button, Input, Select } from 'antd'
+import { Modal, Button, Input, Select, Alert } from 'antd'
 import { useStore } from 'zustand'
 import userStore from '../services/users'
 import { Option } from 'antd/es/mentions'
@@ -8,10 +8,9 @@ type Props = {
   visible: boolean
   onClose: () => void
   title: string
-  content: string
 }
 
-const NewUser: React.FC<Props> = ({ visible, onClose, title, content }) => {
+const NewUser: React.FC<Props> = ({ visible, onClose, title }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -19,12 +18,13 @@ const NewUser: React.FC<Props> = ({ visible, onClose, title, content }) => {
   const [city, setCity] = useState('')
   const [gender, setGender] = useState('')
 
-  const { addUser } = useStore(userStore)
+  const { addUser, errorMessage } = useStore(userStore)
   const handleGenderChange = (value: string) => {
     setGender(value)
   }
 
-  const submitHandler = () => {
+  const submitHandler = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
     let data = {
       name,
       email,
@@ -36,7 +36,6 @@ const NewUser: React.FC<Props> = ({ visible, onClose, title, content }) => {
       },
     }
     addUser(data)
-    window.location.reload()
   }
 
   return (
@@ -54,6 +53,7 @@ const NewUser: React.FC<Props> = ({ visible, onClose, title, content }) => {
       ]}
     >
       <div className='modal'>
+        {errorMessage && <Alert message={errorMessage} type='error' />}
         <div>
           <label htmlFor='name'>Name</label>
           <Input id='name' onChange={(e) => setName(e.target.value)} />

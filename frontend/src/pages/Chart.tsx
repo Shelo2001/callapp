@@ -35,7 +35,7 @@ const UsersTable: React.FC = () => {
         options={{
           labels: cityNames,
         }}
-      ></Chart>
+      />
     </div>
   )
 }

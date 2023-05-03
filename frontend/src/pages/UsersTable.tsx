@@ -4,22 +4,23 @@ import userStore from '../services/users'
 import { Table, Modal, Input, Select, Button } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
 import NewUser from '../components/NewUser'
+import { Option } from 'antd/es/mentions'
 
 const UsersTable: React.FC = () => {
-  const { getUsers, users, getUserById, user, deleteUser } = useStore(userStore)
-
-  useEffect(() => {
-    getUsers()
-  }, [users, getUsers])
+  const {
+    getUsers,
+    users,
+    getUserById,
+    user,
+    deleteUser,
+    updateUser,
+    loading,
+  } = useStore(userStore)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const showModal = () => {
     setIsModalOpen(true)
-  }
-
-  const handleOk = () => {
-    setIsModalOpen(false)
   }
 
   const handleCancel = () => {
@@ -94,6 +95,47 @@ const UsersTable: React.FC = () => {
     getUserById(id)
   }
 
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
+  const [gender, setGender] = useState('')
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name)
+      setEmail(user.email)
+      setPhone(user.phone)
+      setStreet(user.address.street)
+      setCity(user.address.city)
+      handleGenderChange(user.gender)
+    }
+  }, [user])
+
+  const handleGenderChange = (value: string) => {
+    setGender(value)
+  }
+
+  const handleUpdate = () => {
+    let data = {
+      id: user.id,
+      name,
+      email,
+      phone,
+      gender,
+      address: {
+        street,
+        city,
+      },
+    }
+    updateUser(data, user?.id)
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   return (
     <div style={{ padding: '30px' }}>
       <Button
@@ -104,23 +146,27 @@ const UsersTable: React.FC = () => {
         Add new user
       </Button>
 
-      <Table
-        onRow={(e) => ({
-          onDoubleClick: () => handleRowDoubleClick(e.key),
-        })}
-        dataSource={dataSource}
-        columns={columns}
-      />
+      {loading ? (
+        <p>Loading</p>
+      ) : (
+        <Table
+          onRow={(e) => ({
+            onDoubleClick: () => handleRowDoubleClick(e.key),
+          })}
+          dataSource={dataSource}
+          columns={columns}
+        />
+      )}
       <Modal
         title={user?.name}
         open={isModalOpen}
-        onOk={handleOk}
+        onOk={handleUpdate}
         onCancel={handleCancel}
         footer={[
           <Button key='back' onClick={handleCancel}>
             Cancel
           </Button>,
-          <Button key='submit' type='primary' onClick={handleOk}>
+          <Button type='primary' onClick={handleUpdate}>
             Update
           </Button>,
         ]}
@@ -128,48 +174,66 @@ const UsersTable: React.FC = () => {
         <div className='modal'>
           <div>
             <label htmlFor='name'>Name</label>
-            <Input id='name' value={user?.name} />
+            <Input
+              id='name'
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
           </div>
 
           <div>
             <label htmlFor='email'>Email</label>
-            <Input id='email' value={user?.email} />
+            <Input
+              id='email'
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
           </div>
 
           <div>
             <label htmlFor='phone'>Phone</label>
-            <Input id='phone' value={user?.phone} />
+            <Input
+              id='phone'
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+            />
           </div>
 
           <div>
             <label htmlFor='street'>Street</label>
-            <Input id='street' value={user?.address?.street} />
+            <Input
+              id='street'
+              onChange={(e) => setStreet(e.target.value)}
+              value={street}
+            />
           </div>
 
           <div>
             <label htmlFor='city'>City</label>
-            <Input id='city' value={user?.address?.city} />
+            <Input
+              id='city'
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+            />
           </div>
 
           <div>
             <label htmlFor='gender'>Gender</label>
             <Select
               id='gender'
-              defaultValue='gender'
               style={{ width: '100%' }}
-              options={[
-                { value: 'male', label: 'Male' },
-                { value: 'female', label: 'Female' },
-              ]}
-            />
+              onChange={handleGenderChange}
+            >
+              <Option value='male'>Male</Option>
+              <Option value='female'>Female</Option>
+            </Select>
           </div>
         </div>
       </Modal>
       <NewUser
         visible={isModalVisible}
         onClose={handleModalClose}
-        title='My Modal Title'
-        content='This is the content of my modal'
+        title='Create New User'
       />
     </div>
   )

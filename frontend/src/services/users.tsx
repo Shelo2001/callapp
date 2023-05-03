@@ -16,20 +16,25 @@ interface User {
 interface UserStore {
   users: User[]
   user: User
+  loading: boolean
+  errorMessage: string | null
   getUsers: () => Promise<void>
   getUserById: (id: number) => Promise<User>
   deleteUser: (id: number) => Promise<void>
   addUser: (data: object) => Promise<void>
+  updateUser: (data: object, id: number) => Promise<void>
 }
 
 const userStore = createStore<UserStore>((set) => ({
   users: [],
+  loading: false,
   async getUsers() {
+    set({ loading: true })
     try {
       const response: AxiosResponse<User[]> = await axios.get<User[]>(
         '/api/users'
       )
-      set({ users: response.data })
+      set({ users: response.data, loading: false })
     } catch (error) {
       console.error(error)
     }
@@ -50,6 +55,7 @@ const userStore = createStore<UserStore>((set) => ({
         `/api/users/user/${id}`
       )
       set({ user: response.data })
+      window.location.reload()
     } catch (error) {
       console.error(error)
     }
@@ -60,9 +66,30 @@ const userStore = createStore<UserStore>((set) => ({
         `/api/users/create`,
         data
       )
-      set({ user: response.data })
+      if (response.data) {
+        window.location.reload()
+      }
     } catch (error) {
-      console.error(error)
+      if (error instanceof Error) {
+        set({ errorMessage: error.response.data.message })
+        setTimeout(() => {
+          set({ errorMessage: null })
+        }, 3000)
+      }
+    }
+  },
+
+  async updateUser(data: object, id: number) {
+    try {
+      const response: AxiosResponse<User> = await axios.put<User>(
+        `/api/users/user/${id}`,
+        data
+      )
+      if (response.data) {
+        window.location.href = '/users'
+      }
+    } catch (error) {
+      console.log(error)
     }
   },
 }))
