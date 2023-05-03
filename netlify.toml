@@ -3,3 +3,6 @@
 
 [dev]
   publish = "dist"
+
+[functions]
+  included_files = ["data.json"]
