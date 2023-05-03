@@ -29,7 +29,6 @@ const UsersTable: React.FC = () => {
   return (
     <div style={{ padding: '30px' }}>
       <div>
-        {' '}
         <h1>Pie Chart</h1>
         <Chart
           type='pie'
