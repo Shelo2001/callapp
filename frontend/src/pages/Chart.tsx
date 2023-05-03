@@ -9,6 +9,7 @@ const UsersTable: React.FC = () => {
   useEffect(() => {
     getUsers()
   }, [])
+
   interface Cities {
     [key: string]: any
   }
@@ -27,15 +28,33 @@ const UsersTable: React.FC = () => {
 
   return (
     <div style={{ padding: '30px' }}>
-      <Chart
-        type='pie'
-        width={1000}
-        height={400}
-        series={count}
-        options={{
-          labels: cityNames,
-        }}
-      />
+      <div>
+        {' '}
+        <h1>Pie Chart</h1>
+        <Chart
+          type='pie'
+          width={1000}
+          height={400}
+          series={count}
+          options={{
+            labels: cityNames,
+          }}
+        />
+      </div>
+      <div style={{ marginTop: '50px' }}>
+        <h1>Bar Chart</h1>
+        <Chart
+          type='bar'
+          width={1000}
+          height={400}
+          series={[{ data: count, name: 'population' }]}
+          options={{
+            xaxis: {
+              categories: cityNames,
+            },
+          }}
+        />
+      </div>
     </div>
   )
 }
