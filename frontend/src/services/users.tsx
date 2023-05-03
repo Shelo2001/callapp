@@ -63,7 +63,7 @@ const userStore = createStore<UserStore>((set) => ({
   async addUser(data: object) {
     try {
       const response: AxiosResponse<User> = await axios.post<User>(
-        `https://brilliant-tulumba-e4c4ea.netlify.app/.netlify/functions/app/user/create`,
+        `https://brilliant-tulumba-e4c4ea.netlify.app/.netlify/functions/app/create`,
         data
       )
       if (response.data) {
